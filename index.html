@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skinmain Studio</title>
+<title>Skinmain</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -16,9 +16,8 @@
 }
 
 body{
-  background: radial-gradient(circle at top,#1a1a40,#050510);
+  background:#06060f;
   color:#fff;
-  overflow-x:hidden;
 }
 
 /* NAV */
@@ -26,34 +25,34 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px;
+  padding:16px 20px;
 }
 
 .logo{
-  font-size:20px;
   font-weight:600;
 }
 
 .menu-btn{
-  padding:10px 18px;
+  padding:8px 14px;
+  border-radius:10px;
   border:1px solid rgba(255,255,255,0.2);
-  border-radius:12px;
   cursor:pointer;
 }
 
-/* MENU PANEL */
+/* MENU */
 #menu{
   position:fixed;
   top:0;
   right:-100%;
-  width:70%;
+  width:75%;
   height:100%;
-  background:#0a0a14;
+  background:#0c0c18;
   display:flex;
   flex-direction:column;
   padding:80px 30px;
   gap:25px;
-  transition:.4s;
+  transition:.35s ease;
+  z-index:999;
 }
 
 #menu a{
@@ -64,12 +63,11 @@ nav{
 
 /* HERO */
 .hero{
-  text-align:center;
-  padding:80px 20px;
+  padding:40px 20px;
 }
 
 .hero h1{
-  font-size:38px;
+  font-size:32px;
   margin-bottom:10px;
 }
 
@@ -79,95 +77,73 @@ nav{
 
 .hero p{
   opacity:.7;
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 
 /* BUTTON */
 .btn{
-  padding:14px 28px;
-  border-radius:14px;
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#5865F2,#a855f7);
   border:none;
   color:#fff;
   cursor:pointer;
-  background:linear-gradient(135deg,#5865F2,#a855f7);
-  position:relative;
-  overflow:hidden;
-  transition:.3s;
 }
 
-.btn::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.3),transparent);
-  transform:translateX(-100%);
-  transition:.6s;
-}
-
-.btn:hover::before{
-  transform:translateX(100%);
-}
-
-.btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 20px 60px rgba(168,85,247,.6);
-}
-
-/* CARDS */
+/* SECTION */
 .section{
-  padding:40px 20px;
+  padding:25px 16px;
 }
 
+.section h2{
+  margin-bottom:15px;
+}
+
+/* CARD */
 .card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:20px;
-  backdrop-filter:blur(10px);
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 50px rgba(168,85,247,.2);
+  background:#0f0f1f;
+  border-radius:16px;
+  padding:10px;
+  margin-bottom:14px;
 }
 
 .card img{
   width:100%;
-  border-radius:14px;
-  margin-bottom:10px;
+  border-radius:12px;
+}
+
+/* TEXT */
+.card h3{
+  margin-top:8px;
+  font-size:16px;
 }
 
 /* SOCIAL */
 .social{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:15px;
+  gap:10px;
 }
 
 .social div{
-  padding:30px;
-  border-radius:16px;
+  background:#111122;
+  padding:18px;
+  border-radius:12px;
   text-align:center;
-  background:rgba(255,255,255,0.04);
-  transition:.3s;
-}
-
-.social div:hover{
-  transform:translateY(-5px);
-  border:1px solid #a855f7;
 }
 
 /* CTA */
 .cta{
   text-align:center;
-  padding:60px 20px;
+  padding:30px 20px;
 }
 
+/* FOOTER */
 footer{
   text-align:center;
-  padding:20px;
+  padding:15px;
+  font-size:12px;
   opacity:.6;
 }
 </style>
@@ -194,7 +170,7 @@ footer{
 </section>
 
 <section class="section">
-  <h2>Featured Work</h2>
+  <h2>Portfolio</h2>
 
   <div class="card">
     <img src="Showcase1.webp">
@@ -210,7 +186,6 @@ footer{
     <img src="Showcase3.webp">
     <h3>Hatsune Miku</h3>
   </div>
-
 </section>
 
 <section class="section">
@@ -218,14 +193,13 @@ footer{
 
   <div class="card">
     <img src="Review1.webp">
-    <p>Amazing skin, best quality ever</p>
+    <h3>Amazing skin</h3>
   </div>
 
   <div class="card">
     <img src="Review2.webp">
-    <p>Perfect design and shading</p>
+    <h3>Perfect shading</h3>
   </div>
-
 </section>
 
 <section class="section">
@@ -236,12 +210,10 @@ footer{
     <div>Instagram</div>
     <div>TikTok</div>
   </div>
-
 </section>
 
 <section class="cta">
   <h2>Start Your Project</h2>
-  <p>Open a ticket and begin today</p>
   <button class="btn">Open Ticket</button>
 </section>
 
@@ -252,7 +224,7 @@ footer{
 <script>
 function toggleMenu(){
   const menu = document.getElementById("menu");
-  menu.style.right = menu.style.right === "0px" ? "-100%" : "0";
+  menu.style.right = (menu.style.right === "0px") ? "-100%" : "0";
 }
 </script>
 
