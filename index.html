@@ -1,1 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skin Studio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#07070c;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* animated glow background */
+body::before{
+  content:"";
+  position:fixed;
+  width:600px;height:600px;
+  background:radial-gradient(circle,#6c63ff,transparent);
+  top:-200px;left:-200px;
+  filter:blur(140px);
+  animation:moveGlow 10s infinite alternate;
+  z-index:-1;
+}
+
+@keyframes moveGlow{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(200px,200px)}
+}
+
+/* section */
+section{padding:90px 20px;text-align:center}
+
+/* gradient heading */
+h1{
+  font-size:52px;
+  background:linear-gradient(90deg,#fff,#888,#fff);
+  background-size:200%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+h2{font-size:32px;margin-bottom:30px}
+p{color:#aaa}
+
+/* button */
+.btn{
+  padding:14px 28px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#6c63ff,#8a2be2);
+  border:none;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #6c63ff;
+}
+
+/* grid */
+.grid{display:grid;gap:25px}
+@media(min-width:768px){
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+}
+
+/* card */
+.card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-12px) scale(1.03);
+  box-shadow:0 0 40px rgba(108,99,255,0.5);
+}
+
+.card img{
+  width:100%;
+  transition:0.4s;
+}
+
+.card:hover img{
+  transform:scale(1.08);
+}
+
+/* pricing */
+.price{padding:30px}
+.popular{
+  border:1px solid gold;
+  box-shadow:0 0 30px rgba(255,215,0,0.3);
+}
+
+/* scroll animation */
+.hidden{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.8s;
+}
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+footer{
+  padding:30px;
+  color:#777;
+  text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section>
+  <h1>CRAFT YOUR PERFECT SKIN</h1>
+  <p>Custom Minecraft skins made by real artists</p>
+  <br>
+  <a href="https://discord.gg/skinmain">
+    <button class="btn">Order Now</button>
+  </a>
+</section>
+
+<!-- PORTFOLIO -->
+<section>
+  <h2>Featured Work</h2>
+
+  <div class="grid grid-2">
+
+    <div class="card">
+      <img src="Showcase1.webp">
+      <h3>Reze</h3>
+    </div>
+
+    <div class="card">
+      <img src="Showcase2.webp">
+      <h3>Pomni</h3>
+    </div>
+
+    <div class="card">
+      <img src="Showcase3.webp">
+      <h3>Miku</h3>
+    </div>
+
+    <div class="card">
+      <img src="Showcase4.webp">
+      <h3>Sonic</h3>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <h2>Pricing</h2>
+
+  <div class="grid grid-2">
+
+    <div class="card price popular">
+      <h3>⭐ Premium</h3>
+      <p>Best quality</p>
+      <br>
+      <p>64x64 — $20</p>
+      <p>128x128 — $25</p>
+      <br>
+      <p>✔ Advanced shading</p>
+      <p>✔ Unique design</p>
+      <p>✔ Revisions</p>
+      <p>⏱ 24–48h</p>
+      <br>
+      <a href="https://discord.gg/skinmain">
+        <button class="btn">Order</button>
+      </a>
+    </div>
+
+    <div class="card price">
+      <h3>Lite</h3>
+      <p>Budget option</p>
+      <br>
+      <p>64x64 — $10</p>
+      <p>128x128 — $15</p>
+      <br>
+      <p>✔ Clean design</p>
+      <p>✔ Fast delivery</p>
+      <p>✔ Affordable</p>
+      <p>⏱ 12–24h</p>
+      <br>
+      <a href="https://discord.gg/skinmain">
+        <button class="btn">Order</button>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section>
+  <h2>Reviews</h2>
+
+  <div class="grid grid-2">
+
+    <div class="card">
+      <img src="Review1.webp">
+    </div>
+
+    <div class="card">
+      <img src="Review2.webp">
+    </div>
+
+    <div class="card">
+      <img src="Review3.webp">
+    </div>
+
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section>
+  <h2>Follow Us</h2>
+
+  <a href="https://discord.gg/skinmain"><button class="btn">Discord</button></a>
+  <a href="https://www.instagram.com/skinmainteam"><button class="btn">Instagram</button></a>
+  <a href="https://www.tiktok.com/@skinmainteam"><button class="btn">TikTok</button></a>
+
+</section>
+
+<!-- CTA -->
+<section>
+  <h2>Start Your Project</h2>
+  <p>Open a ticket and get your custom skin now</p>
+  <br>
+  <a href="https://discord.gg/skinmain">
+    <button class="btn">Open Ticket</button>
+  </a>
+</section>
+
+<footer>
+  © 2026 Skin Studio
+</footer>
+
+<!-- JS ANIMATION -->
+<script>
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll("section, .card").forEach(el=>{
+  el.classList.add("hidden");
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
