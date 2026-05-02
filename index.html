@@ -8,184 +8,167 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
-  background:#0a0a14;
+  background: radial-gradient(circle at top,#1a1a40,#050510);
   color:#fff;
   overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:20px;
-  position:fixed;
-  width:100%;
-  background:rgba(10,10,20,.6);
-  backdrop-filter:blur(12px);
-  z-index:10;
 }
 
-.logo{font-weight:700;font-size:20px;}
-.menu{padding:10px 18px;border-radius:12px;border:1px solid #555;}
+.logo{
+  font-size:20px;
+  font-weight:600;
+}
+
+.menu-btn{
+  padding:10px 18px;
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* MENU PANEL */
+#menu{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:70%;
+  height:100%;
+  background:#0a0a14;
+  display:flex;
+  flex-direction:column;
+  padding:80px 30px;
+  gap:25px;
+  transition:.4s;
+}
+
+#menu a{
+  color:#fff;
+  text-decoration:none;
+  font-size:20px;
+}
 
 /* HERO */
 .hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
   text-align:center;
-  padding:20px;
+  padding:80px 20px;
 }
 
 .hero h1{
-  font-size:64px;
-  font-weight:700;
-  background:linear-gradient(90deg,#fff,#a855f7);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.hero span{
+  color:#a855f7;
 }
 
 .hero p{
-  margin-top:15px;
   opacity:.7;
+  margin-bottom:30px;
 }
 
+/* BUTTON */
 .btn{
-  margin-top:25px;
   padding:14px 28px;
   border-radius:14px;
   border:none;
-  background:#5865F2;
   color:#fff;
-  font-weight:600;
   cursor:pointer;
-  box-shadow:0 10px 40px rgba(88,101,242,.5);
+  background:linear-gradient(135deg,#5865F2,#a855f7);
+  position:relative;
+  overflow:hidden;
   transition:.3s;
 }
 
-.btn:hover{transform:translateY(-3px);}
-
-/* SECTIONS */
-section{padding:120px 20px;text-align:center;}
-
-h2{font-size:42px;margin-bottom:10px;}
-.sub{opacity:.6;margin-bottom:40px;}
-
-/* GRID */
-.grid{
-  display:grid;
-  gap:25px;
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.3),transparent);
+  transform:translateX(-100%);
+  transition:.6s;
 }
 
-.grid-3{
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+.btn:hover::before{
+  transform:translateX(100%);
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(168,85,247,.6);
 }
 
 /* CARDS */
-.card{
-  background:#111122;
-  border-radius:18px;
-  overflow:hidden;
-  position:relative;
-  transition:.3s;
+.section{
+  padding:40px 20px;
 }
 
-.card img{width:100%;display:block;}
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px;
+  backdrop-filter:blur(10px);
+  transition:.3s;
+}
 
 .card:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(168,85,247,.2);
 }
 
-/* OVERLAY BUTTON */
-.overlay{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(.8);
-  background:#5865F2;
-  padding:12px 22px;
-  border-radius:12px;
-  opacity:0;
-  transition:.3s;
-}
-
-.card:hover .overlay{
-  opacity:1;
-  transform:translate(-50%,-50%) scale(1);
-}
-
-/* PRICING */
-.pricing{
-  display:grid;
-  gap:25px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-}
-
-.price-box{
-  padding:30px;
-  border-radius:18px;
-  background:#111122;
-}
-
-.highlight{
-  border:2px solid #a855f7;
-}
-
-/* REVIEWS */
-.review{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  background:#111122;
-  padding:20px;
-  border-radius:16px;
+.card img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:10px;
 }
 
 /* SOCIAL */
 .social{
   display:grid;
-  gap:20px;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:1fr 1fr;
+  gap:15px;
 }
 
 .social div{
-  padding:40px;
-  background:#111122;
+  padding:30px;
   border-radius:16px;
-}
-
-/* FLOAT BUTTON */
-.float{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:14px 30px;
-  border-radius:14px;
-  background:#5865F2;
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 10px 40px rgba(88,101,242,.5);
-  z-index:100;
-  animation:float 2s infinite ease-in-out;
-}
-
-@keyframes float{
-  0%,100%{transform:translate(-50%,0);}
-  50%{transform:translate(-50%,-6px);}
-}
-
-/* FOOTER */
-footer{
-  padding:40px;
   text-align:center;
-  opacity:.5;
+  background:rgba(255,255,255,0.04);
+  transition:.3s;
+}
+
+.social div:hover{
+  transform:translateY(-5px);
+  border:1px solid #a855f7;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  padding:60px 20px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  opacity:.6;
 }
 </style>
 </head>
@@ -193,111 +176,85 @@ footer{
 <body>
 
 <nav>
-<div class="logo">Skinmain</div>
-<div class="menu">Menu</div>
+  <div class="logo">Skinmain</div>
+  <div class="menu-btn" onclick="toggleMenu()">Menu</div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-<h1>CRAFT YOUR<br>PERFECT SKIN</h1>
-<p>Custom Minecraft skins made by real artists.</p>
-<a href="https://discord.gg/skinmain"><button class="btn">Order Now</button></a>
+<div id="menu">
+  <a href="#">Home</a>
+  <a href="#">Portfolio</a>
+  <a href="#">Pricing</a>
+  <a href="#">Reviews</a>
 </div>
 
-<!-- SHOWCASE -->
-<section>
-<h2>Featured Work</h2>
-<p class="sub">Our best creations</p>
-
-<div class="grid grid-3">
-<div class="card">
-<img src="Showcase1.webp">
-<div class="overlay">ORDER</div>
-</div>
-
-<div class="card">
-<img src="Showcase2.webp">
-<div class="overlay">ORDER</div>
-</div>
-
-<div class="card">
-<img src="Showcase3.webp">
-<div class="overlay">ORDER</div>
-</div>
-
-<div class="card">
-<img src="Showcase4.webp">
-<div class="overlay">ORDER</div>
-</div>
-</div>
+<section class="hero">
+  <h1>Create Your <span>Perfect Skin</span></h1>
+  <p>Custom Minecraft skins crafted by professionals</p>
+  <button class="btn">Order Now</button>
 </section>
 
-<!-- PRICING -->
-<section>
-<h2>Pricing</h2>
-<p class="sub">Choose your plan</p>
+<section class="section">
+  <h2>Featured Work</h2>
 
-<div class="pricing">
-<div class="price-box highlight">
-<h3>Premium</h3>
-<p>$20 / $25</p>
-<p>Advanced shading • Unique design • Revisions</p>
-<button class="btn">Order Premium</button>
-</div>
+  <div class="card">
+    <img src="Showcase1.webp">
+    <h3>Reze</h3>
+  </div>
 
-<div class="price-box">
-<h3>Lite</h3>
-<p>$10 / $15</p>
-<p>Clean design • Fast delivery</p>
-<button class="btn">Order Lite</button>
-</div>
-</div>
+  <div class="card">
+    <img src="Showcase2.webp">
+    <h3>Pomni</h3>
+  </div>
+
+  <div class="card">
+    <img src="Showcase3.webp">
+    <h3>Hatsune Miku</h3>
+  </div>
+
 </section>
 
-<!-- REVIEWS -->
-<section>
-<h2>Reviews</h2>
-<p class="sub">What clients say</p>
+<section class="section">
+  <h2>Reviews</h2>
 
-<div class="grid grid-3">
-<div class="review">
-<img src="Review1.webp">
-<p>Amazing skin quality!</p>
-</div>
+  <div class="card">
+    <img src="Review1.webp">
+    <p>Amazing skin, best quality ever</p>
+  </div>
 
-<div class="review">
-<img src="Review2.webp">
-<p>Perfect design and detail.</p>
-</div>
+  <div class="card">
+    <img src="Review2.webp">
+    <p>Perfect design and shading</p>
+  </div>
 
-<div class="review">
-<img src="Review3.webp">
-<p>Best artist ever.</p>
-</div>
-</div>
 </section>
 
-<!-- SOCIAL -->
-<section>
-<h2>See How We Create</h2>
+<section class="section">
+  <h2>Follow Us</h2>
 
-<div class="social">
-<div>Discord</div>
-<div>Instagram</div>
-<div>TikTok</div>
-</div>
+  <div class="social">
+    <div>Discord</div>
+    <div>Instagram</div>
+    <div>TikTok</div>
+  </div>
+
 </section>
 
-<!-- CTA -->
-<section>
-<h2>Start Your Project</h2>
-<p class="sub">Open a ticket and begin today</p>
-<button class="btn">Open Ticket</button>
+<section class="cta">
+  <h2>Start Your Project</h2>
+  <p>Open a ticket and begin today</p>
+  <button class="btn">Open Ticket</button>
 </section>
 
-<footer>© 2026 Skinmain</footer>
+<footer>
+  © 2026 Skinmain
+</footer>
 
-<a href="https://discord.gg/skinmain" class="float">ORDER NOW</a>
+<script>
+function toggleMenu(){
+  const menu = document.getElementById("menu");
+  menu.style.right = menu.style.right === "0px" ? "-100%" : "0";
+}
+</script>
 
 </body>
 </html>
