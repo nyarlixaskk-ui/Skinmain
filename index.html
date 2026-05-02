@@ -1,274 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Skin Studio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07070c;
+  --card:rgba(255,255,255,0.06);
+  --stroke:rgba(255,255,255,0.1);
+  --primary:#6c63ff;
+  --accent:#8a2be2;
+  --gold:#ffd700;
+}
 
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   font-family:'Poppins',sans-serif;
-  background:#07070c;
-  color:white;
+  background:var(--bg);
+  color:#fff;
   overflow-x:hidden;
 }
 
-/* animated glow background */
+/* ===== Ambient glow ===== */
 body::before{
   content:"";
   position:fixed;
-  width:600px;height:600px;
-  background:radial-gradient(circle,#6c63ff,transparent);
-  top:-200px;left:-200px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,var(--primary),transparent 60%);
+  top:-250px;left:-250px;
   filter:blur(140px);
-  animation:moveGlow 10s infinite alternate;
-  z-index:-1;
+  animation:floatGlow 12s ease-in-out infinite alternate;
+  z-index:-2;
 }
-
-@keyframes moveGlow{
+@keyframes floatGlow{
   0%{transform:translate(0,0)}
-  100%{transform:translate(200px,200px)}
+  100%{transform:translate(220px,200px)}
 }
 
-/* section */
-section{padding:90px 20px;text-align:center}
+/* ===== Cursor glow ===== */
+.cursor-glow{
+  position:fixed; pointer-events:none; z-index:9999;
+  width:220px;height:220px; border-radius:50%;
+  background:radial-gradient(circle, rgba(108,99,255,.35), transparent 60%);
+  filter:blur(30px); transform:translate(-50%,-50%);
+}
 
-/* gradient heading */
+/* ===== Navbar ===== */
+.nav{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(12px);
+  background:rgba(10,10,15,.6);
+  border-bottom:1px solid var(--stroke);
+}
+.nav-wrap{
+  max-width:1100px; margin:auto; padding:14px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo{font-weight:700; letter-spacing:.5px}
+.nav a{color:#ddd; text-decoration:none; margin:0 10px; font-size:14px}
+.nav a:hover{color:#fff}
+.nav-btn{margin-left:10px}
+.menu-btn{display:none}
+
+/* mobile menu */
+.mobile{
+  display:none; flex-direction:column; gap:12px;
+  padding:12px 16px; border-top:1px solid var(--stroke);
+}
+.mobile a{color:#ddd; text-decoration:none}
+.show-menu{display:flex}
+
+@media(max-width:700px){
+  .nav-links{display:none}
+  .menu-btn{display:inline-block}
+}
+
+/* ===== Sections ===== */
+section{padding:90px 20px; text-align:center}
+.container{max-width:1100px; margin:auto}
 h1{
-  font-size:52px;
-  background:linear-gradient(90deg,#fff,#888,#fff);
+  font-size:54px;
+  background:linear-gradient(90deg,#fff,#9a9a9a,#fff);
   background-size:200%;
   -webkit-background-clip:text;
   color:transparent;
-  animation:shine 4s linear infinite;
+  animation:shine 5s linear infinite;
 }
-
 @keyframes shine{
   0%{background-position:0%}
   100%{background-position:200%}
 }
+h2{font-size:32px; margin-bottom:28px}
+p.sub{color:#aaa}
 
-h2{font-size:32px;margin-bottom:30px}
-p{color:#aaa}
-
-/* button */
+/* ===== Buttons ===== */
 .btn{
-  padding:14px 28px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#6c63ff,#8a2be2);
-  border:none;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
+  padding:14px 28px; border-radius:14px;
+  border:1px solid rgba(255,255,255,.15);
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff; cursor:pointer; transition:.25s;
+  box-shadow:0 0 0 rgba(0,0,0,0);
 }
 .btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 25px #6c63ff;
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 0 25px rgba(108,99,255,.5);
 }
-
-/* grid */
-.grid{display:grid;gap:25px}
-@media(min-width:768px){
-  .grid-2{grid-template-columns:repeat(2,1fr)}
+.btn-outline{
+  background:transparent; border:1px solid var(--stroke);
 }
+.btn-outline:hover{box-shadow:0 0 18px rgba(255,255,255,.15)}
 
-/* card */
+/* Neon social buttons */
+.btn-discord{background:#5865F2}
+.btn-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.btn-tt{background:#111}
+.btn-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+
+/* ===== Grid / Cards ===== */
+.grid{display:grid; gap:26px}
+@media(min-width:768px){ .grid-2{grid-template-columns:repeat(2,1fr)} }
+
 .card{
-  background:rgba(255,255,255,0.05);
+  background:var(--card);
   backdrop-filter:blur(12px);
   border-radius:20px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,0.08);
-  transition:0.4s;
+  border:1px solid var(--stroke);
+  overflow:hidden; position:relative;
+  transition:.35s;
 }
-
 .card:hover{
-  transform:translateY(-12px) scale(1.03);
-  box-shadow:0 0 40px rgba(108,99,255,0.5);
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 0 40px rgba(108,99,255,.35);
 }
 
-.card img{
-  width:100%;
-  transition:0.4s;
+/* shine overlay */
+.card::after{
+  content:""; position:absolute; inset:-50%;
+  background:linear-gradient(120deg,transparent, rgba(255,255,255,.12), transparent);
+  transform:rotate(25deg) translateX(-120%);
+  transition:.6s;
 }
+.card:hover::after{ transform:rotate(25deg) translateX(120%) }
 
-.card:hover img{
-  transform:scale(1.08);
-}
+/* image zoom */
+.card img{width:100%; display:block; transition:.4s}
+.card:hover img{transform:scale(1.08)}
 
-/* pricing */
-.price{padding:30px}
+/* tilt (mouse move) */
+.tilt{ transform-style:preserve-3d }
+
+/* ===== Pricing ===== */
+.price{padding:28px}
 .popular{
-  border:1px solid gold;
-  box-shadow:0 0 30px rgba(255,215,0,0.3);
+  border:1px solid var(--gold);
+  box-shadow:0 0 30px rgba(255,215,0,.25);
+}
+.badge{
+  display:inline-block; font-size:12px; color:#111;
+  background:var(--gold); padding:4px 8px; border-radius:8px; margin-bottom:10px;
 }
 
-/* scroll animation */
-.hidden{
-  opacity:0;
-  transform:translateY(40px);
-  transition:all 0.8s;
+/* ===== Viewer (fake 3D) ===== */
+.viewer{
+  margin:20px auto 0; width:220px; height:280px;
+  perspective:800px;
 }
-.show{
-  opacity:1;
-  transform:translateY(0);
+.viewer-inner{
+  width:100%; height:100%;
+  transform-style:preserve-3d;
+  transition:transform .15s linear;
 }
-
-footer{
-  padding:30px;
-  color:#777;
-  text-align:center;
+.viewer-inner img{
+  width:100%; height:100%; object-fit:cover; border-radius:16px;
+  border:1px solid var(--stroke);
 }
 
+/* ===== Reviews ===== */
+.review img{width:100%}
+
+/* ===== FAQ ===== */
+.faq{max-width:800px; margin:0 auto}
+.q{
+  text-align:left; padding:16px 18px; margin:10px 0;
+  background:var(--card); border:1px solid var(--stroke);
+  border-radius:14px; cursor:pointer;
+}
+.a{
+  text-align:left; padding:0 18px 14px 18px; color:#bbb; display:none;
+}
+
+/* ===== Back to top ===== */
+.top{
+  position:fixed; right:16px; bottom:16px; z-index:40;
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer; opacity:0; transform:translateY(20px); transition:.3s;
+}
+.top.show{opacity:1; transform:translateY(0)}
+
+/* ===== Reveal ===== */
+.hidden{opacity:0; transform:translateY(40px); transition:.8s}
+.show{opacity:1; transform:translateY(0)}
+
+footer{padding:30px; color:#777; text-align:center}
 </style>
 </head>
 
 <body>
 
+<div class="cursor-glow" id="glow"></div>
+
+<!-- NAVBAR -->
+<div class="nav">
+  <div class="nav-wrap">
+    <div class="logo">Skin Studio</div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://discord.gg/skinmain" class="btn nav-btn">Order</a>
+    </div>
+    <button class="btn btn-outline menu-btn" id="menuBtn">Menu</button>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <a href="#work">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://discord.gg/skinmain" class="btn">Order</a>
+  </div>
+</div>
+
 <!-- HERO -->
 <section>
-  <h1>CRAFT YOUR PERFECT SKIN</h1>
-  <p>Custom Minecraft skins made by real artists</p>
-  <br>
-  <a href="https://discord.gg/skinmain">
-    <button class="btn">Order Now</button>
-  </a>
+  <div class="container">
+    <h1>CRAFT YOUR PERFECT SKIN</h1>
+    <p class="sub">Custom Minecraft skins made by real artists. Fast delivery. Unique design.</p>
+    <br/>
+    <div class="btn-row">
+      <a href="https://discord.gg/skinmain"><button class="btn btn-discord">Discord</button></a>
+      <a href="https://www.instagram.com/skinmainteam"><button class="btn btn-ig">Instagram</button></a>
+      <a href="https://www.tiktok.com/@skinmainteam"><button class="btn btn-tt">TikTok</button></a>
+    </div>
+
+    <!-- 3D-like viewer -->
+    <div class="viewer">
+      <div class="viewer-inner" id="viewer">
+        <img src="Showcase1.webp" alt="preview"/>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PORTFOLIO -->
-<section>
-  <h2>Featured Work</h2>
-
-  <div class="grid grid-2">
-
-    <div class="card">
-      <img src="Showcase1.webp">
-      <h3>Reze</h3>
+<section id="work">
+  <div class="container">
+    <h2>Featured Work</h2>
+    <div class="grid grid-2">
+      <div class="card tilt"><img src="Showcase1.webp"><h3>Reze</h3></div>
+      <div class="card tilt"><img src="Showcase2.webp"><h3>Pomni</h3></div>
+      <div class="card tilt"><img src="Showcase3.webp"><h3>Miku</h3></div>
+      <div class="card tilt"><img src="Showcase4.webp"><h3>Sonic</h3></div>
     </div>
-
-    <div class="card">
-      <img src="Showcase2.webp">
-      <h3>Pomni</h3>
-    </div>
-
-    <div class="card">
-      <img src="Showcase3.webp">
-      <h3>Miku</h3>
-    </div>
-
-    <div class="card">
-      <img src="Showcase4.webp">
-      <h3>Sonic</h3>
-    </div>
-
   </div>
 </section>
 
 <!-- PRICING -->
-<section>
-  <h2>Pricing</h2>
+<section id="pricing">
+  <div class="container">
+    <h2>Pricing</h2>
+    <div class="grid grid-2">
 
-  <div class="grid grid-2">
+      <div class="card price popular">
+        <div class="badge">MOST POPULAR</div>
+        <h3>Premium</h3>
+        <p class="sub">Full custom detailed skin</p><br/>
+        <p>64x64 — $20</p>
+        <p>128x128 — $25</p><br/>
+        <p>✔ Advanced shading</p>
+        <p>✔ Unique design</p>
+        <p>✔ Revisions included</p>
+        <p>⏱ 24–48h</p><br/>
+        <a href="https://discord.gg/skinmain"><button class="btn">Order Premium</button></a>
+      </div>
 
-    <div class="card price popular">
-      <h3>⭐ Premium</h3>
-      <p>Best quality</p>
-      <br>
-      <p>64x64 — $20</p>
-      <p>128x128 — $25</p>
-      <br>
-      <p>✔ Advanced shading</p>
-      <p>✔ Unique design</p>
-      <p>✔ Revisions</p>
-      <p>⏱ 24–48h</p>
-      <br>
-      <a href="https://discord.gg/skinmain">
-        <button class="btn">Order</button>
-      </a>
+      <div class="card price">
+        <h3>Lite</h3>
+        <p class="sub">Simple & fast</p><br/>
+        <p>64x64 — $10</p>
+        <p>128x128 — $15</p><br/>
+        <p>✔ Clean design</p>
+        <p>✔ Fast delivery</p>
+        <p>✔ Budget friendly</p>
+        <p>⏱ 12–24h</p><br/>
+        <a href="https://discord.gg/skinmain"><button class="btn">Order Lite</button></a>
+      </div>
+
     </div>
-
-    <div class="card price">
-      <h3>Lite</h3>
-      <p>Budget option</p>
-      <br>
-      <p>64x64 — $10</p>
-      <p>128x128 — $15</p>
-      <br>
-      <p>✔ Clean design</p>
-      <p>✔ Fast delivery</p>
-      <p>✔ Affordable</p>
-      <p>⏱ 12–24h</p>
-      <br>
-      <a href="https://discord.gg/skinmain">
-        <button class="btn">Order</button>
-      </a>
-    </div>
-
   </div>
 </section>
 
 <!-- REVIEWS -->
-<section>
-  <h2>Reviews</h2>
-
-  <div class="grid grid-2">
-
-    <div class="card">
-      <img src="Review1.webp">
+<section id="reviews">
+  <div class="container">
+    <h2>Reviews</h2>
+    <div class="grid grid-2">
+      <div class="card review"><img src="Review1.webp"></div>
+      <div class="card review"><img src="Review2.webp"></div>
+      <div class="card review"><img src="Review3.webp"></div>
     </div>
-
-    <div class="card">
-      <img src="Review2.webp">
-    </div>
-
-    <div class="card">
-      <img src="Review3.webp">
-    </div>
-
   </div>
 </section>
 
-<!-- SOCIAL -->
-<section>
-  <h2>Follow Us</h2>
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <div class="q">How do I order?</div>
+      <div class="a">Click any Order button and open a Discord ticket. Share your idea and references.</div>
 
-  <a href="https://discord.gg/skinmain"><button class="btn">Discord</button></a>
-  <a href="https://www.instagram.com/skinmainteam"><button class="btn">Instagram</button></a>
-  <a href="https://www.tiktok.com/@skinmainteam"><button class="btn">TikTok</button></a>
+      <div class="q">How long does it take?</div>
+      <div class="a">Lite: 12–24 hours. Premium: 24–48 hours depending on complexity.</div>
 
+      <div class="q">Do you offer revisions?</div>
+      <div class="a">Yes. Premium includes revisions. Lite includes small tweaks.</div>
+    </div>
+  </div>
 </section>
 
 <!-- CTA -->
 <section>
-  <h2>Start Your Project</h2>
-  <p>Open a ticket and get your custom skin now</p>
-  <br>
-  <a href="https://discord.gg/skinmain">
-    <button class="btn">Open Ticket</button>
-  </a>
+  <div class="container">
+    <h2>Start Your Project</h2>
+    <p class="sub">Open a ticket and get your custom skin started today.</p><br/>
+    <a href="https://discord.gg/skinmain"><button class="btn">Open Ticket</button></a>
+  </div>
 </section>
 
-<footer>
-  © 2026 Skin Studio
-</footer>
+<footer>© 2026 Skin Studio</footer>
 
-<!-- JS ANIMATION -->
+<!-- Back to top -->
+<div class="top" id="topBtn">↑</div>
+
 <script>
+/* ===== reveal on scroll ===== */
 const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("show"); }});
+});
+document.querySelectorAll("section, .card").forEach(el=>{
+  el.classList.add("hidden"); observer.observe(el);
+});
+
+/* ===== mobile menu ===== */
+const menuBtn = document.getElementById('menuBtn');
+const mobile = document.getElementById('mobileMenu');
+menuBtn && menuBtn.addEventListener('click', ()=> mobile.classList.toggle('show-menu'));
+
+/* ===== cursor glow ===== */
+const glow = document.getElementById('glow');
+document.addEventListener('mousemove', (e)=>{
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+/* ===== back to top ===== */
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 400) topBtn.classList.add('show');
+  else topBtn.classList.remove('show');
+});
+topBtn.onclick = ()=> window.scrollTo({top:0, behavior:'smooth'});
+
+/* ===== tilt cards ===== */
+document.querySelectorAll('.tilt').forEach(card=>{
+  card.addEventListener('mousemove', (e)=>{
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - .5;
+    const y = (e.clientY - rect.top) / rect.height - .5;
+    card.style.transform = `rotateY(${x*10}deg) rotateX(${y*-10}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave', ()=>{
+    card.style.transform = 'rotateY(0) rotateX(0)';
   });
 });
 
-document.querySelectorAll("section, .card").forEach(el=>{
-  el.classList.add("hidden");
-  observer.observe(el);
+/* ===== fake 3D viewer ===== */
+const viewer = document.getElementById('viewer');
+let rx = 0, ry = 0, dragging=false;
+viewer.addEventListener('mousedown', ()=> dragging=true);
+window.addEventListener('mouseup', ()=> dragging=false);
+window.addEventListener('mousemove', (e)=>{
+  if(!dragging) return;
+  rx += e.movementY * 0.3;
+  ry += e.movementX * 0.3;
+  viewer.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+});
+
+/* ===== FAQ accordion ===== */
+document.querySelectorAll('.q').forEach((q)=>{
+  q.addEventListener('click', ()=>{
+    const a = q.nextElementSibling;
+    a.style.display = (a.style.display==='block') ? 'none' : 'block';
+  });
 });
 </script>
 
